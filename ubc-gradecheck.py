@@ -6,10 +6,14 @@ import time
 #the function prototype
 def getGrades(us, pa):
     while(True):
-        wait = input("Do you want your grades?(1 or 0)")
-        if(wait != "1"):
+        # asks you if you want to continue
+        wait = input("Do you want your grades?(y or n)")
+
+        #Exits if you do not enter a y
+        if(wait != "y"):
                 break
-        #random delay
+
+        #random delay not to break any rules
         delay = 30 + random.randint(0, 100)
         print("wait for " + str(delay) + " seconds so we don't overload the server")
        	for i in range(1,delay):
@@ -20,15 +24,20 @@ def getGrades(us, pa):
         
         #ubc ssc website
         url = "https://cas.id.ubc.ca/ubc-cas/login?TARGET=https%3A%2F%2Fssc.adm.ubc.ca%2Fsscportal%2Fservlets%2FSRVSSCFramework"
+
         #create a new request
         r = requests.Session()
         page = r.get(url)
+
         #if page does not open
         if(page.status_code > 200):
                 print("Sorry, could not open")
-                continue
+                continue #try again
+
+
         #read the page
         s = bs(page.content,"html.parser")
+
         #get the stuff we need to login
         box = s.findAll('div',{'class':'box fl-panel'})
         val = box[0].findAll("input",{"type":"hidden"})
@@ -36,27 +45,34 @@ def getGrades(us, pa):
         token2 = val[1]['value']
         token3 = val[2]['value']
 
-        #username and password
+        #username and password assignments
         user = us
         password = pa
+
         #this gathers the stuff from above to be used
         payload = { 'username': user, 'password': password , "lt": token, "execution":token2,"_eventId":token3}
+
+
         #logs into the site
         p = r.post(url,data=payload)
+
         #if we cannot log in
         if(p.status_code > 200):
                 print("Sorry, could not open")
-                continue
+                continue #try again
         #read
         s = bs(p.content,"html.parser")
+
         #grades page
         url2 = "https://ssc.adm.ubc.ca/sscportal/servlets/SRVAcademicRecord?context=html?context=html"
-        #open and read
+
+        #open page
         u = r.get(url2)
         if(u.status_code > 200):
                 print("Sorry, could not open")
-                continue
-        s = bs(u.content,"html.parser")
+                continue #try again
+
+        s = bs(u.content,"html.parser") # read
 
         #get the grades
         for i in range(0,20):
@@ -69,11 +85,11 @@ def getGrades(us, pa):
                 
                 print(v+ " " + k) 
 
-        r.close();
+        r.close(); #close the session
 
-#your infp
-userID = 
-passID = 
+#your info
+userID = ""
+passID = ""
 
 #the function
 getGrades(userID,passID)
