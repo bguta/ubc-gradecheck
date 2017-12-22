@@ -8,6 +8,6 @@ works as of Python 3.6.3 Dec 2017.
 
 You only need to enter your username and password in string format and the code will do the rest. 
 
-Use 1 or 0 to continue and exit.
+Use y or n to continue and exit.
 
 There is a delay so that the server does not get overwhelmed.
