@@ -75,7 +75,8 @@ def getGrades(us, pa):
         s = bs(u.content,"html.parser") # read
 
         #get the grades
-        for i in range(0,20):
+        classes = 19 #total number of classes you have, you can change
+        for i in range(0,classes + 1):
                 x = s.findAll("tr",{"id":"row-all-" + str(i)})
                 v = x[0].td.text
                 y = x[0].findAll("td",{"class":"listRow grade"})
