@@ -13,6 +13,7 @@ On Github, click on the green button that says "Clone or download", then "Downlo
 Extract the zipped/compressed folder and open the resulting folder.
 
 Edit the ubc-gradecheck.py to add your username and password
+
 Run ubc-gradecheck.py
 
 # Remarks
