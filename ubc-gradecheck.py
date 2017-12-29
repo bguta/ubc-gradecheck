@@ -14,7 +14,7 @@ def getGrades(us, pa):
                 break
 
         #random delay not to break any rules
-        delay = 30 + random.randint(0, 100)
+        delay = 5 + random.randint(0, 10)
         print("wait for " + str(delay) + " seconds so we don't overload the server")
        	for i in range(1,delay):
                 if(i % 10 == 0):
